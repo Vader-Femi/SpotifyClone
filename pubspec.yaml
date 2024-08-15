@@ -63,7 +63,7 @@ flutter:
   assets:
    - assets/fonts/
    - assets/images/
-   - assets/vectors
+   - assets/vectors/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -79,25 +79,25 @@ flutter:
   fonts:
    - family: Satoshi
      fonts:
-       - asset: fonts/Satoshi-Black
+       - asset: assets/fonts/Satoshi-Black.otf
          weight: 900
-       - asset: fonts/Satoshi-BlackItalic
+       - asset: assets/fonts/Satoshi-BlackItalic.otf
          weight: 900
-       - asset: fonts/Satoshi-Bold
+       - asset: assets/fonts/Satoshi-Bold.otf
          weight: 600
-       - asset: fonts/Satoshi-BoldItalic.otf
+       - asset: assets/fonts/Satoshi-BoldItalic.otf
          weight: 600
-       - asset: fonts/Satoshi-Italic.otf
+       - asset: assets/fonts/Satoshi-Italic.otf
          weight: 600
-       - asset: fonts/Satoshi-Medium.otf
+       - asset: assets/fonts/Satoshi-Medium.otf
          weight: 500
-       - asset: fonts/Satoshi-MediumItalic.otf
+       - asset: assets/fonts/Satoshi-MediumItalic.otf
          weight: 500
-       - asset: fonts/Satoshi-Regular.otf
+       - asset: assets/fonts/Satoshi-Regular.otf
          weight: 400
-       - asset: fonts/Satoshi-Light.otf
+       - asset: assets/fonts/Satoshi-Light.otf
          weight: 300
-       - asset: fonts/Satoshi-LightItalic.otf
+       - asset: assets/fonts/Satoshi-LightItalic.otf
          weight: 300
 
   #
