@@ -1,0 +1,1 @@
+ D:\\ProjectFiles\\Flutter\\SpotifyClone\\.dart_tool\\flutter_build\\b61ab172fc1220d932b76bad8bbbac89\\native_assets.yaml: 
