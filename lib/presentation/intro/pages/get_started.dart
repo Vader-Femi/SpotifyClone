@@ -18,7 +18,7 @@ class GetStarted extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(AppImages.introBg),
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                   filterQuality: FilterQuality.medium),
             ),
           ),
@@ -31,7 +31,9 @@ class GetStarted extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.topCenter,
-                  child: SvgPicture.asset(AppVectors.appLogo),
+                  child: Hero(
+                      tag: "Spotify Logo",
+                      child: SvgPicture.asset(AppVectors.appLogo)),
                 ),
                 const Spacer(),
                 const Text(
@@ -51,16 +53,20 @@ class GetStarted extends StatelessWidget {
                       fontSize: 13),
                 ),
                 const SizedBox(height: 21),
-                BasicAppButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => const ChooseModePage(),
-                      ),
-                    );
-                  },
-                  title: "Get Started",
+                Hero(
+                  tag: "Next Button",
+                  child: BasicAppButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const ChooseModePage(),
+                        ),
+                      );
+                    },
+                    title: "Get Started",
+                  ),
                 )
               ],
             ),

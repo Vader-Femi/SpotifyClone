@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify_clone/common/widgets/button/basic_app_button.dart';
@@ -19,7 +18,7 @@ class ChooseModePage extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(AppImages.chooseModeBg),
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                   filterQuality: FilterQuality.medium),
             ),
           ),
@@ -32,7 +31,9 @@ class ChooseModePage extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.topCenter,
-                  child: SvgPicture.asset(AppVectors.appLogo),
+                  child: Hero(
+                      tag: "Spotify Logo",
+                      child: SvgPicture.asset(AppVectors.appLogo)),
                 ),
                 const Spacer(),
                 const Text(
@@ -109,17 +110,20 @@ class ChooseModePage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 21),
-                BasicAppButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (BuildContext context) =>
-                    //         const ChooseModePage(),
-                    //   ),
-                    // );
-                  },
-                  title: "Continue",
+                Hero(
+                  tag: "Next Button",
+                  child: BasicAppButton(
+                    onPressed: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (BuildContext context) =>
+                      //         const ChooseModePage(),
+                      //   ),
+                      // );
+                    },
+                    title: "Continue",
+                  ),
                 )
               ],
             ),
