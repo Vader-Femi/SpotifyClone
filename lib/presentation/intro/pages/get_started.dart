@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:spotify_clone/common/helpers/is_light_mode.dart';
 import 'package:spotify_clone/common/widgets/button/basic_app_button.dart';
 import 'package:spotify_clone/core/configs/assets/app_images.dart';
 import 'package:spotify_clone/core/configs/assets/app_vectors.dart';
@@ -27,7 +28,7 @@ class GetStarted extends StatelessWidget {
             ),
           ),
           Container(
-            color: Colors.black.withOpacity(0.15),
+            color: Colors.black.withOpacity(context.isLightMode ? 0 : 0.15), // This elvis operator pretty much does nothing visible because the image covers the background, but I like is so just leave it. Thanks
           ),
           Padding(
             padding: const EdgeInsets.all(40),
@@ -45,7 +46,7 @@ class GetStarted extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
-                      fontSize: 20),
+                      fontSize: 20,),
                 ),
                 const SizedBox(height: 21),
                 const Text(

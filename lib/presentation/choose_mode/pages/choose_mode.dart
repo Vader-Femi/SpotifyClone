@@ -6,6 +6,7 @@ import 'package:spotify_clone/common/widgets/button/basic_app_button.dart';
 import 'package:spotify_clone/core/configs/assets/app_images.dart';
 import 'package:spotify_clone/core/configs/assets/app_vectors.dart';
 import 'package:spotify_clone/core/configs/theme/app_colors.dart';
+import 'package:spotify_clone/presentation/auth/pages/signup_or_signin.dart';
 import 'package:spotify_clone/presentation/choose_mode/bloc/theme_cubit.dart';
 
 class ChooseModePage extends StatelessWidget {
@@ -93,6 +94,45 @@ class ChooseModePage extends StatelessWidget {
                           onTap: () {
                             context
                                 .read<ThemeCubit>()
+                                .updateTheme(ThemeMode.system);
+                          },
+                          child: ClipOval(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: const Color(0xff30393C)
+                                        .withOpacity(0.5)),
+                                height: 73,
+                                width: 73,
+                                child: const Icon(
+                                  Icons.settings,
+                                  size: 36,
+                                  color: Colors.white,
+                                  // fit: BoxFit.none,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 17),
+                        const Text(
+                          "System",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: AppColours.grey,
+                            fontSize: 17,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            context
+                                .read<ThemeCubit>()
                                 .updateTheme(ThemeMode.light);
                           },
                           child: ClipOval(
@@ -123,7 +163,7 @@ class ChooseModePage extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
                 const SizedBox(height: 21),
@@ -131,13 +171,13 @@ class ChooseModePage extends StatelessWidget {
                   tag: "Next Button",
                   child: BasicAppButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (BuildContext context) =>
-                      //         const ChooseModePage(),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const SignupOrSignin(),
+                        ),
+                      );
                     },
                     title: "Continue",
                   ),
