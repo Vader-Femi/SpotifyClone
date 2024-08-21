@@ -20,11 +20,11 @@ class AppTheme {
       contentPadding: const EdgeInsets.all(30),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: const BorderSide(color: Colors.black, width: 0.4),
+        borderSide: const BorderSide(color: Colors.black, width: 1),
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: const BorderSide(color: Colors.black, width: 0.4),
+        borderSide: const BorderSide(color: Colors.black, width: 1),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -67,11 +67,11 @@ class AppTheme {
       contentPadding: const EdgeInsets.all(30),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: const BorderSide(color: Colors.white, width: 0.4),
+        borderSide: const BorderSide(color: Colors.white, width: 1),
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: const BorderSide(color: Colors.white, width: 0.4),
+        borderSide: const BorderSide(color: Colors.white, width: 1),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
