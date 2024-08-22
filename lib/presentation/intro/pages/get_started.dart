@@ -23,8 +23,7 @@ class GetStarted extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(AppImages.introBg),
-                  fit: BoxFit.cover,
-                  filterQuality: FilterQuality.medium),
+                  fit: BoxFit.cover),
             ),
           ),
           Container(

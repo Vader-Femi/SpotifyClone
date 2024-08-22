@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:spotify_clone/service_locator.dart';
 import 'firebase_options.dart';
 import 'package:spotify_clone/core/configs/theme/AppTheme.dart';
 import 'package:spotify_clone/presentation/choose_mode/bloc/theme_cubit.dart';
@@ -21,6 +22,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
   options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await initializeDependencies();
 
   runApp(const MyApp());
 }
