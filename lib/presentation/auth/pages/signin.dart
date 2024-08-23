@@ -3,10 +3,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:spotify_clone/common/widgets/appbar/app_bar.dart';
 import 'package:spotify_clone/common/widgets/button/basic_app_button.dart';
 import 'package:spotify_clone/core/configs/assets/app_vectors.dart';
+import 'package:spotify_clone/data/models/auth/sign_in_req.dart';
+import 'package:spotify_clone/domain/usecases/auth/signin.dart';
 import 'package:spotify_clone/presentation/auth/pages/signup.dart';
+import 'package:spotify_clone/presentation/root/pages/root.dart';
+import 'package:spotify_clone/service_locator.dart';
 
 class SignIn extends StatelessWidget {
-  const SignIn({super.key});
+  SignIn({super.key});
+
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +26,16 @@ class SignIn extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: null,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 30,
-        ),
-        child: ListView(
+      body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Column(
           children: [
             const SizedBox(height: 20),
             _signinText(),
             const SizedBox(height: 5),
             _supportText(),
             const SizedBox(height: 26),
-            _usernameOrEmailField(context),
+            _emailField(context),
             const SizedBox(height: 16),
             _passwordField(context),
             _recoverPasswordButton(context),
@@ -38,7 +43,27 @@ class SignIn extends StatelessWidget {
             Hero(
               tag: "Next Button",
               child: BasicAppButton(
-                onPressed: () {},
+                onPressed: () async {
+
+                  var result = await sl<SigninUseCase>().call(
+                      params: SignInUserRequest(
+                        email: _email.text.toString(),
+                        password: _password.text.toString(),
+                      ));
+
+                  result.fold((l) {
+                    var snackbar = SnackBar(content: Text(l));
+                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                  }, (r) {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                            const RootPage()),
+                            (route) => false);
+                  });
+
+                },
                 title: "Sign in",
               ),
             ),
@@ -90,13 +115,18 @@ class SignIn extends StatelessWidget {
     );
   }
 
-  Widget _usernameOrEmailField(BuildContext context) {
-    return const TextField(
-        decoration: InputDecoration(hintText: "Enter Username or Email"));
+  Widget _emailField(BuildContext context) {
+    return TextField(
+      decoration: const InputDecoration(hintText: "Enter Email"),
+      controller: _email,
+    );
   }
 
   Widget _passwordField(BuildContext context) {
-    return const TextField(decoration: InputDecoration(hintText: "Password"));
+    return TextField(
+      decoration: const InputDecoration(hintText: "Password"),
+      controller: _password,
+    );
   }
 
   Widget _recoverPasswordButton(BuildContext context) {

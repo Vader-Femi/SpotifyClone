@@ -28,80 +28,82 @@ class SignupOrSignin extends StatelessWidget {
             alignment: Alignment.bottomRight,
             child: SvgPicture.asset(AppVectors.signupOrSigninBottomWave),
           ),
-          ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            children: [
-              const SizedBox(height: 100),
-              Hero(
-                tag: "Spotify Logo",
-                child: SvgPicture.asset(AppVectors.appLogo),
-              ),
-              const SizedBox(height: 55),
-              const Text(
-                "Enjoy listening to music",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 26,
-                ),
-              ),
-              const SizedBox(height: 21),
-              const Text(
-                "Spotify is a proprietary Swedish audio streaming and media services provider",
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(fontWeight: FontWeight.normal, fontSize: 17),
-              ),
-              const SizedBox(height: 30),
-              Hero(
-                tag: "Next Button",
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: BasicAppButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                              SignUp(),
-                            ),
-                          );
-                        },
-                        title: "Register",
-                        height: 73,
-                      ),
+          Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Column(
+                children: [
+                  Hero(
+                    tag: "Spotify Logo",
+                    child: SvgPicture.asset(AppVectors.appLogo),
+                  ),
+                  const SizedBox(height: 55),
+                  const Text(
+                    "Enjoy listening to music",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 26,
                     ),
-                    const SizedBox(width: 30),
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                              const SignIn(),
-                            ),
-                          );
-                        },
-                        style: TextButton.styleFrom(
-                          minimumSize: const Size.fromHeight(73),
-                        ),
-                        child: const Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Sign In",
+                  ),
+                  const SizedBox(height: 21),
+                  const Text(
+                    "Spotify is a proprietary Swedish audio streaming and media services provider",
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(fontWeight: FontWeight.normal, fontSize: 17),
+                  ),
+                  const SizedBox(height: 30),
+                  Hero(
+                    tag: "Next Button",
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: BasicAppButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) => SignUp(),
+                                ),
+                              );
+                            },
+                            title: "Register",
+                            height: 73,
                           ),
                         ),
-                      ),
-                    )
-                  ],
-                ),
-              )
-            ],
+                        const SizedBox(width: 30),
+                        Expanded(
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) => SignIn(),
+                                ),
+                              );
+                            },
+                            style: TextButton.styleFrom(
+                              minimumSize: const Size.fromHeight(73),
+                            ),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Sign In",
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 300),
+                ],
+              ),
+            ),
           )
         ],
       ),

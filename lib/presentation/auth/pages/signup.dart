@@ -26,11 +26,9 @@ class SignUp extends StatelessWidget {
           width: 40,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 30,
-        ),
-        child: ListView(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Column(
           children: [
             const SizedBox(height: 20),
             _registerText(),
@@ -156,7 +154,7 @@ class SignUp extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (BuildContext context) => const SignIn(),
+                    builder: (BuildContext context) => SignIn(),
                   ),
                 );
               },
