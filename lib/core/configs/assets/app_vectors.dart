@@ -10,4 +10,5 @@ class AppVectors {
   static const  String signupOrSigninBottomWave = "${basePath}signup_or_signin_bottom_wave$format";
   static const  String google = "${basePath}google$format";
   static const  String apple = "${basePath}apple$format";
+  static const  String homeTopCard = "${basePath}home_top_card$format";
 }

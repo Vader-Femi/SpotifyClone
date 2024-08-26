@@ -10,6 +10,7 @@ abstract class AuthFirebaseService {
   Future<Either> signin(SignInUserRequest signInUserRequest);
 }
 
+
 class AuthFirebaseServiceImpl extends AuthFirebaseService {
 
   @override
