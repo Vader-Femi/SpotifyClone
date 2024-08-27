@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:spotify_clone/core/configs/assets/app_vectors.dart';
+import 'package:spotify_clone/presentation/home/pages/home.dart';
 import 'package:spotify_clone/presentation/intro/pages/get_started.dart';
 
 class SplashPage extends StatefulWidget {
@@ -31,6 +32,6 @@ class _SplashPageState extends State<SplashPage> {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (BuildContext context) => const GetStarted()));
+            builder: (BuildContext context) => const HomePage()));
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:spotify_clone/common/widgets/appbar/app_bar.dart';
 import 'package:spotify_clone/core/configs/assets/app_images.dart';
 import 'package:spotify_clone/core/configs/assets/app_vectors.dart';
+import 'package:spotify_clone/presentation/home/widgets/news_songs.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -33,35 +34,46 @@ class _HomePageState extends State<HomePage>
           width: 40,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 28.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _homeTopCard(),
-              const SizedBox(height: 41),
-              _tabs(),
-            ],
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _homeTopCard(),
+            _tabs(),
+            SizedBox(
+              height: 260,
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  const NewsSongs(),
+                  Container(),
+                  Container(),
+                  Container()
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
   Widget _homeTopCard() {
-    return Center(
-      child: SizedBox(
-        height: 150,
-        child: Stack(
-          children: [
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: SvgPicture.asset(AppVectors.homeTopCard)),
-            Align(
-                alignment: Alignment.bottomRight,
-                child: Image.asset(AppImages.homeArtist))
-          ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 28),
+      child: Center(
+        child: SizedBox(
+          height: 150,
+          child: Stack(
+            children: [
+              Align(
+                  alignment: Alignment.bottomCenter,
+                  child: SvgPicture.asset(AppVectors.homeTopCard)),
+              Align(
+                  alignment: Alignment.bottomRight,
+                  child: Image.asset(AppImages.homeArtist))
+            ],
+          ),
         ),
       ),
     );
@@ -70,9 +82,16 @@ class _HomePageState extends State<HomePage>
   Widget _tabs() {
     return TabBar(
         controller: _tabController,
+        padding: const EdgeInsets.fromLTRB(28, 40, 0, 30),
+        isScrollable: true,
+        tabAlignment: TabAlignment.start,
         tabs: _tabHeadings
             .map(
-              (tab) => Text(tab),
+              (tab) => Text(
+                tab,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
             )
             .toList());
   }

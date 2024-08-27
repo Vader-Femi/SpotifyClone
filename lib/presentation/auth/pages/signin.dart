@@ -47,8 +47,8 @@ class SignIn extends StatelessWidget {
 
                   var result = await sl<SigninUseCase>().call(
                       params: SignInUserRequest(
-                        email: _email.text.toString(),
-                        password: _password.text.toString(),
+                        email: "johndoe@gmail.com",//_email.text.toString(),
+                        password: "123456",//_password.text.toString(),
                       ));
 
                   result.fold((l) {
