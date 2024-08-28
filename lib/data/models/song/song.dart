@@ -28,7 +28,7 @@ extension SongModelx on SongModel {
       title: title ?? "Unknown",
       artist: artist ?? "Unknown",
       duration: duration ?? 0.0,
-      releaseDate: releaseDate ?? Timestamp.now()
+      releaseDate: releaseDate ?? Timestamp.fromMicrosecondsSinceEpoch(8640000000000000000) // 1970-01-01T00:00:00Z (UTC).
     );
   }
 }

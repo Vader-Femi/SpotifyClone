@@ -11,4 +11,5 @@ class AppVectors {
   static const  String google = "${basePath}google$format";
   static const  String apple = "${basePath}apple$format";
   static const  String homeTopCard = "${basePath}home_top_card$format";
+  static const  String play = "${basePath}play$format";
 }

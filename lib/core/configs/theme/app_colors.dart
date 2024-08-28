@@ -15,6 +15,13 @@ class AppColours {
 
   static const backButtonContainerLight = Color(0x0a000000);
   static const backButtonContainerDark = Color(0x0affffff);
+
   static const backButtonLight = Color(0xff414141);
   static const backButtonDark = Color(0xffDDDDDD);
+
+  static const playIconBGLight = Color(0xffE6E6E6);
+  static const playIconBGDark = Color(0xff2C2C2C);
+
+  static const playIconLight = Color(0xff555555);
+  static const playIconDark = Color(0xff959595);
 }
