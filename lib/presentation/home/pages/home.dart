@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:spotify_clone/common/widgets/appbar/app_bar.dart';
 import 'package:spotify_clone/core/configs/assets/app_images.dart';
 import 'package:spotify_clone/core/configs/assets/app_vectors.dart';
+import 'package:spotify_clone/presentation/home/widgets/all_songs.dart';
 import 'package:spotify_clone/presentation/home/widgets/news_songs.dart';
 
 class HomePage extends StatefulWidget {
@@ -52,6 +53,7 @@ class _HomePageState extends State<HomePage>
                 ],
               ),
             ),
+            AllSongs()
           ],
         ),
       ),

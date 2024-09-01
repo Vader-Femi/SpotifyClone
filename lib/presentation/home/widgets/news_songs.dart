@@ -44,6 +44,7 @@ class NewsSongs extends StatelessWidget {
       itemBuilder: (context, index) {
         return SizedBox(
           width: 160,
+          // height: 180,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -99,6 +100,8 @@ class NewsSongs extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10),
                 child: Text(
                   songs[index].artist,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                       fontWeight: FontWeight.normal, fontSize: 14),
                 ),
