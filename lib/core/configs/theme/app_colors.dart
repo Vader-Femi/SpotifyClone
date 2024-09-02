@@ -24,4 +24,7 @@ class AppColours {
 
   static const playIconLight = Color(0xff555555);
   static const playIconDark = Color(0xff959595);
+
+  static const favouriteIconLight = Color(0xffB4B4B4);
+  static const favouriteIonDark = Color(0xff565656);
 }

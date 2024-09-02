@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage>
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _homeTopCard(),
             _tabs(),
@@ -53,7 +52,9 @@ class _HomePageState extends State<HomePage>
                 ],
               ),
             ),
-            AllSongs()
+            const SizedBox(height: 37),
+            const AllSongs(),
+            const SizedBox(height: 40),
           ],
         ),
       ),
