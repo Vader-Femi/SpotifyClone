@@ -7,6 +7,7 @@ import 'package:spotify_clone/core/configs/theme/app_colors.dart';
 import 'package:spotify_clone/domain/entities/song/song.dart';
 import 'package:spotify_clone/presentation/home/bloc/all_songs_state.dart';
 import 'package:spotify_clone/presentation/home/bloc/all_songs_cubit.dart';
+import 'package:spotify_clone/presentation/now_playing/pages/now_playing.dart';
 
 class AllSongs extends StatelessWidget {
   const AllSongs({super.key});
@@ -64,32 +65,41 @@ class AllSongs extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 40,
-                width: 40,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: context.isLightMode
-                        ? AppColours.playIconBGLight
-                        : AppColours.playIconBGDark),
-                transform: Matrix4.translationValues(-10, 10, 0),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 6.5),
-                  child: SvgPicture.asset(
-                    AppVectors.play,
-                    colorFilter: ColorFilter.mode(
-                        context.isLightMode
-                            ? AppColours.playIconLight
-                            : AppColours.playIconDark,
-                        BlendMode.srcIn),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => NowPlayingPage(
+                                song: songs[index],
+                              )));
+                },
+                child: Container(
+                  height: 40,
+                  width: 40,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: context.isLightMode
+                          ? AppColours.playIconBGLight
+                          : AppColours.playIconBGDark),
+                  transform: Matrix4.translationValues(-10, 10, 0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 6.5),
+                    child: SvgPicture.asset(
+                      AppVectors.play,
+                      colorFilter: ColorFilter.mode(
+                          context.isLightMode
+                              ? AppColours.playIconLight
+                              : AppColours.playIconDark,
+                          BlendMode.srcIn),
+                    ),
                   ),
                 ),
               ),
-              const SizedBox(width: 23),
+              const SizedBox(width: 14),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,6 +114,7 @@ class AllSongs extends StatelessWidget {
                     Text(
                       songs[index].artist,
                       textAlign: TextAlign.start,
+                      maxLines: 1,
                       style: const TextStyle(
                           fontWeight: FontWeight.normal, fontSize: 12),
                     ),
@@ -120,15 +131,16 @@ class AllSongs extends StatelessWidget {
                         fontWeight: FontWeight.normal, fontSize: 15),
                   ),
                   IconButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.zero,
-                      icon: Icon(
-                        Icons.favorite,
-                        size: 22,
-                        color: context.isLightMode
-                            ? AppColours.favouriteIconLight
-                            : AppColours.favouriteIonDark,
-                      ))
+                    onPressed: () {},
+                    padding: EdgeInsets.zero,
+                    icon: Icon(
+                      Icons.favorite,
+                      size: 22,
+                      color: context.isLightMode
+                          ? AppColours.favouriteIconLight
+                          : AppColours.favouriteIonDark,
+                    ),
+                  ),
                 ],
               )
             ],

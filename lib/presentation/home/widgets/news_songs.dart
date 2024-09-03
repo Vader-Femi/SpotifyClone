@@ -8,6 +8,7 @@ import 'package:spotify_clone/core/configs/theme/app_colors.dart';
 import 'package:spotify_clone/domain/entities/song/song.dart';
 import 'package:spotify_clone/presentation/home/bloc/news_songs_cubit.dart';
 import 'package:spotify_clone/presentation/home/bloc/news_songs_state.dart';
+import 'package:spotify_clone/presentation/now_playing/pages/now_playing.dart';
 
 class NewsSongs extends StatelessWidget {
   const NewsSongs({super.key});
@@ -44,7 +45,7 @@ class NewsSongs extends StatelessWidget {
       itemBuilder: (context, index) {
         return SizedBox(
           width: 160,
-          // height: 180,
+          height: 180,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -59,27 +60,37 @@ class NewsSongs extends StatelessWidget {
                       ),
                     ),
                   ),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: context.isLightMode
-                              ? AppColours.playIconBGLight
-                              : AppColours.playIconBGDark),
-                      transform: Matrix4.translationValues(-10, 10, 0),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 6.5),
-                        child: SvgPicture.asset(
-                          AppVectors.play,
-                          colorFilter: ColorFilter.mode(
-                              context.isLightMode
-                                  ? AppColours.playIconLight
-                                  : AppColours.playIconDark,
-                              BlendMode.srcIn),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => NowPlayingPage(
+                                    song: songs[index],
+                                  )));
+                    },
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: context.isLightMode
+                                ? AppColours.playIconBGLight
+                                : AppColours.playIconBGDark),
+                        transform: Matrix4.translationValues(-10, 10, 0),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 6.5),
+                          child: SvgPicture.asset(
+                            AppVectors.play,
+                            colorFilter: ColorFilter.mode(
+                                context.isLightMode
+                                    ? AppColours.playIconLight
+                                    : AppColours.playIconDark,
+                                BlendMode.srcIn),
+                          ),
                         ),
                       ),
                     ),

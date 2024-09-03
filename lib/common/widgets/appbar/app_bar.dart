@@ -4,9 +4,10 @@ import 'package:spotify_clone/core/configs/theme/app_colors.dart';
 
 class BasicAppbar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
+  final Widget? action;
   final bool showBackButton;
 
-  const BasicAppbar({super.key, this.showBackButton = true, this.title});
+  const BasicAppbar({super.key, this.showBackButton = true, this.title, this.action});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,9 @@ class BasicAppbar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       centerTitle: true,
       title: title ?? const Text(""),
+      actions: [
+        action ?? Container()
+      ],
       leading: showBackButton
           ? IconButton(
               onPressed: () => Navigator.pop(context),
