@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:marquee/marquee.dart';
-import 'package:spotify_clone/common/helpers/is_light_mode.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_clone/common/widgets/appbar/app_bar.dart';
 import 'package:spotify_clone/core/configs/constants/app_urls.dart';
+import 'package:spotify_clone/core/configs/theme/app_colors.dart';
 import 'package:spotify_clone/domain/entities/song/song.dart';
+import 'package:spotify_clone/presentation/now_playing/bloc/now_playing_cubit.dart';
+import 'package:spotify_clone/presentation/now_playing/bloc/now_playing_state.dart';
 
 class NowPlayingPage extends StatelessWidget {
   final SongEntity song;
@@ -27,14 +29,19 @@ class NowPlayingPage extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _songCover(context),
-            const SizedBox(height: 17),
-            _nameAndLike(context, song),
-            const SizedBox(height: 50),
-          ],
+      body: BlocProvider(
+        create: (_) => NowPlayingCubit()..loadSong(
+              "${AppURLS.songFirestorage}${song.artist} - ${song.title}.mp3?${AppURLS.mediaAlt}"),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _songCover(context),
+              const SizedBox(height: 17),
+              _songDetails(context, song),
+              const SizedBox(height: 50),
+              _songPlayer(context),
+            ],
+          ),
         ),
       ),
     );
@@ -44,20 +51,20 @@ class NowPlayingPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 27),
       child: Container(
-        height: MediaQuery.of(context).size.height / 2,
+        height: MediaQuery.of(context).size.height / 2.2,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
             image: DecorationImage(
               fit: BoxFit.cover,
               image: NetworkImage(
-                "${AppURLS.firestorage}${song.artist} - ${song.title}.jpeg?${AppURLS.mediaAlt}",
+                "${AppURLS.coverFirestorage}${song.artist} - ${song.title}.jpeg?${AppURLS.mediaAlt}",
               ),
             )),
       ),
     );
   }
 
-  Widget _nameAndLike(BuildContext context, SongEntity song) {
+  Widget _songDetails(BuildContext context, SongEntity song) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 27),
       child: Row(
@@ -71,8 +78,8 @@ class NowPlayingPage extends StatelessWidget {
               children: [
                 Text(
                   song.title,
-                  style:
-                      const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 const SizedBox(height: 6),
                 Text(
@@ -95,5 +102,83 @@ class NowPlayingPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _songPlayer(BuildContext context) {
+    return BlocBuilder<NowPlayingCubit, NowPlayingState>(
+        builder: (context, state) {
+      if (state is NowPlayingLoading) {
+        return Container(
+            alignment: Alignment.center,
+            child: const CircularProgressIndicator());
+      }
+
+      if (state is NowPlayingLoaded) {
+        return Column(
+          children: [
+            Slider(
+                value: context
+                    .read<NowPlayingCubit>()
+                    .songPosition
+                    .inSeconds
+                    .toDouble(),
+                min: 0.0,
+                max: context
+                    .read<NowPlayingCubit>()
+                    .songDuration
+                    .inSeconds
+                    .toDouble(),
+                onChanged: (value) {}),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 27),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    formatDuration(
+                      context.read<NowPlayingCubit>().songPosition,
+                    ),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.normal, fontSize: 12),
+                  ),
+                  Text(
+                    formatDuration(
+                      context.read<NowPlayingCubit>().songDuration,
+                    ),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.normal, fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 40),
+            GestureDetector(
+              onTap: (){
+                context.read<NowPlayingCubit>().playOrPauseSong();
+              },
+              child: Container(
+                height: 72,
+                width: 72,
+                decoration: const BoxDecoration(
+                    shape: BoxShape.circle, color: AppColours.primary),
+                child: Icon(context.read<NowPlayingCubit>().audioPlayer.playing
+                    ? Icons.pause
+                    : Icons.play_arrow),
+              ),
+            ),
+          ],
+        );
+      }
+
+      return Container();
+    });
+  }
+
+  String formatDuration(Duration duration) {
+    final minute = duration.inMinutes.remainder(60);
+    final seconds = duration.inSeconds.remainder(60);
+    return "${minute.toString().padLeft(2, "0")}:${seconds.toString().padLeft(2, "0")}";
   }
 }

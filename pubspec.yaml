@@ -45,6 +45,7 @@ dependencies:
   dartz: ^0.10.1
   cloud_firestore: ^4.15.8
   marquee: ^2.2.3
+  just_audio: ^0.9.40
 
 dev_dependencies:
   flutter_test:
