@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_clone/common/widgets/appbar/app_bar.dart';
+import 'package:spotify_clone/common/widgets/favourite_button/favourite_button.dart';
 import 'package:spotify_clone/core/configs/constants/app_urls.dart';
 import 'package:spotify_clone/core/configs/theme/app_colors.dart';
 import 'package:spotify_clone/domain/entities/song/song.dart';
@@ -93,12 +94,7 @@ class NowPlayingPage extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 5),
-          IconButton(
-            onPressed: () {},
-            padding: EdgeInsets.zero,
-            icon: const Icon(Icons.favorite_border_rounded,
-                size: 24, color: Color(0xff6C6C6C)),
-          ),
+          FavouriteButton(song),
         ],
       ),
     );

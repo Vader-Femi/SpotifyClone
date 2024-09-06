@@ -29,12 +29,10 @@ class NowPlayingCubit extends Cubit<NowPlayingState>{
 
 
   Future<void> loadSong(String url) async {
+    emit(NowPlayingLoading());
     try {
       await audioPlayer.setUrl(url);
       playOrPauseSong();
-      emit(
-        NowPlayingLoaded()
-      );
 
     } catch (e) {
       emit(

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:spotify_clone/common/helpers/is_light_mode.dart';
+import 'package:spotify_clone/common/widgets/favourite_button/favourite_button.dart';
 import 'package:spotify_clone/core/configs/assets/app_vectors.dart';
 import 'package:spotify_clone/core/configs/theme/app_colors.dart';
 import 'package:spotify_clone/domain/entities/song/song.dart';
+import 'package:spotify_clone/domain/usecases/song/add_or_remove_favourite_song.dart';
 import 'package:spotify_clone/presentation/home/bloc/all_songs_state.dart';
 import 'package:spotify_clone/presentation/home/bloc/all_songs_cubit.dart';
 import 'package:spotify_clone/presentation/now_playing/pages/now_playing.dart';
@@ -130,17 +132,7 @@ class AllSongs extends StatelessWidget {
                     style: const TextStyle(
                         fontWeight: FontWeight.normal, fontSize: 15),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    padding: EdgeInsets.zero,
-                    icon: Icon(
-                      Icons.favorite,
-                      size: 22,
-                      color: context.isLightMode
-                          ? AppColours.favouriteIconLight
-                          : AppColours.favouriteIonDark,
-                    ),
-                  ),
+                  FavouriteButton(songs[index]),
                 ],
               )
             ],

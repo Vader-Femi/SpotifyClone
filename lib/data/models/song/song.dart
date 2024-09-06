@@ -6,14 +6,18 @@ class SongModel {
   String? artist;
   num? duration;
   Timestamp? releaseDate;
+  bool? isFavourite;
+  String? songId;
 
   SongModel(
       {required this.title,
       required this.artist,
       required this.duration,
-      required this.releaseDate});
+      required this.releaseDate,
+      required this.isFavourite,
+      required this.songId});
 
-  SongModel.fromJson(Map<String,dynamic> data){
+  SongModel.fromJson(Map<String, dynamic> data) {
     title = data["title"];
     artist = data["artist"];
     duration = data["duration"];
@@ -22,13 +26,15 @@ class SongModel {
 }
 
 extension SongModelx on SongModel {
-
-  SongEntity toEntity(){
+  SongEntity toEntity() {
     return SongEntity(
-      title: title ?? "Unknown",
-      artist: artist ?? "Unknown",
-      duration: duration ?? 0.0,
-      releaseDate: releaseDate ?? Timestamp.fromMicrosecondsSinceEpoch(8640000000000000000) // 1970-01-01T00:00:00Z (UTC).
-    );
+        title: title ?? "Unknown",
+        artist: artist ?? "Unknown",
+        duration: duration ?? 0.0,
+        releaseDate: releaseDate ??
+            Timestamp.fromMicrosecondsSinceEpoch(8640000000000000000),
+        // 1970-01-01T00:00:00Z (UTC).
+        isFavourite: isFavourite ?? false,
+        songId: songId ?? "");
   }
 }

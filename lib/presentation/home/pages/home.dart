@@ -5,6 +5,7 @@ import 'package:spotify_clone/core/configs/assets/app_images.dart';
 import 'package:spotify_clone/core/configs/assets/app_vectors.dart';
 import 'package:spotify_clone/presentation/home/widgets/all_songs.dart';
 import 'package:spotify_clone/presentation/home/widgets/news_songs.dart';
+import 'package:spotify_clone/presentation/profile/pages/profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -33,6 +34,13 @@ class _HomePageState extends State<HomePage>
           AppVectors.appLogo,
           height: 40,
           width: 40,
+        ),
+        action: IconButton(onPressed: () {
+          Navigator.push(context, MaterialPageRoute(
+              builder: (BuildContext context) => const ProfilePage()));
+        }, icon: const Icon(
+          Icons.person
+        ),
         ),
       ),
       body: SingleChildScrollView(
@@ -90,12 +98,13 @@ class _HomePageState extends State<HomePage>
         tabAlignment: TabAlignment.start,
         tabs: _tabHeadings
             .map(
-              (tab) => Text(
+              (tab) =>
+              Text(
                 tab,
                 style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
-            )
+        )
             .toList());
   }
 }
