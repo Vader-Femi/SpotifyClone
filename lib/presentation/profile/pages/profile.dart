@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_clone/common/helpers/is_light_mode.dart';
 import 'package:spotify_clone/common/widgets/appbar/app_bar.dart';
+import 'package:spotify_clone/presentation/home/pages/favourite_songs.dart';
 import 'package:spotify_clone/presentation/profile/bloc/profile_info_cubit.dart';
 import 'package:spotify_clone/presentation/profile/bloc/profile_info_state.dart';
 
@@ -19,6 +20,9 @@ class ProfilePage extends StatelessWidget {
       body: Column(
         children: [
           _profileInfo(context),
+          const SizedBox(height: 19),
+          const FavouriteSongs(),
+          const SizedBox(height: 19),
         ],
       ),
     );

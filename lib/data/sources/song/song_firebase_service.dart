@@ -32,9 +32,8 @@ class SongFirebaseServiceImpl extends SongFirebaseService {
 
       for (var element in data.docs) {
         var songModel = SongModel.fromJson(element.data());
-        var isFavourite = await sl<IsFavouriteSongongUseCase>().call(
-          params: element.reference.id
-        );
+        var isFavourite = await sl<IsFavouriteSongongUseCase>()
+            .call(params: element.reference.id);
         songModel.isFavourite = isFavourite;
         songModel.songId = element.reference.id;
         songs.add(songModel.toEntity());
@@ -58,9 +57,8 @@ class SongFirebaseServiceImpl extends SongFirebaseService {
 
       for (var element in data.docs) {
         var songModel = SongModel.fromJson(element.data());
-        var isFavourite = await sl<IsFavouriteSongongUseCase>().call(
-            params: element.reference.id
-        );
+        var isFavourite = await sl<IsFavouriteSongongUseCase>()
+            .call(params: element.reference.id);
         songModel.isFavourite = isFavourite;
         songModel.songId = element.reference.id;
         songs.add(songModel.toEntity());
@@ -140,11 +138,12 @@ class SongFirebaseServiceImpl extends SongFirebaseService {
       List<SongEntity> songs = [];
 
       FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+      FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
       var user = firebaseAuth.currentUser;
       String uId = user!.uid;
 
-      var data = await FirebaseFirestore.instance
+      var data = await firebaseFirestore
           .collection("Users")
           .doc(uId)
           .collection("Favourites")
@@ -152,14 +151,20 @@ class SongFirebaseServiceImpl extends SongFirebaseService {
           .get();
 
       for (var element in data.docs) {
-        var songModel = SongModel.fromJson(element.data());
+        String songId = element["songId"];
+        var song =
+            await firebaseFirestore.collection("Songs").doc(songId).get();
+        var songModel = SongModel.fromJson(song.data() ?? {});
+        songModel.songId = songId;
         songModel.isFavourite = true;
-        songModel.songId = element.reference.id;
         songs.add(songModel.toEntity());
+        print(songModel.toEntity());
       }
+      
+      print(songs.length);
 
       return Right(songs);
-    } catch (e) {
+    } on FirebaseException catch (e) {
       return const Left("An Error occurred, Please try again");
     }
   }

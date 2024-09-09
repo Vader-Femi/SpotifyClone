@@ -6,7 +6,6 @@ import 'package:spotify_clone/common/widgets/favourite_button/favourite_button.d
 import 'package:spotify_clone/core/configs/assets/app_vectors.dart';
 import 'package:spotify_clone/core/configs/theme/app_colors.dart';
 import 'package:spotify_clone/domain/entities/song/song.dart';
-import 'package:spotify_clone/domain/usecases/song/add_or_remove_favourite_song.dart';
 import 'package:spotify_clone/presentation/home/bloc/all_songs_state.dart';
 import 'package:spotify_clone/presentation/home/bloc/all_songs_cubit.dart';
 import 'package:spotify_clone/presentation/now_playing/pages/now_playing.dart';
@@ -109,6 +108,7 @@ class AllSongs extends StatelessWidget {
                     Text(
                       songs[index].title,
                       textAlign: TextAlign.start,
+                      maxLines: 2,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 16),
                     ),
@@ -116,7 +116,7 @@ class AllSongs extends StatelessWidget {
                     Text(
                       songs[index].artist,
                       textAlign: TextAlign.start,
-                      maxLines: 1,
+                      maxLines: 2,
                       style: const TextStyle(
                           fontWeight: FontWeight.normal, fontSize: 12),
                     ),

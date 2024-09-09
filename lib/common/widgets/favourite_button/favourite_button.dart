@@ -8,7 +8,8 @@ import 'package:spotify_clone/domain/entities/song/song.dart';
 
 class FavouriteButton extends StatelessWidget {
   final SongEntity song;
-  const FavouriteButton(this.song, {super.key});
+  final Function? extraFunction;
+  const FavouriteButton(this.song, {super.key, this.extraFunction});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +19,12 @@ class FavouriteButton extends StatelessWidget {
         builder: (context, state) {
           if (state is FavouriteButtonInitial) {
             return IconButton(
-              onPressed: () {
-                context.read<FavouriteButtonCubit>().favouriteButtonUpdated(song.songId);
+              onPressed: () async {
+                await context.read<FavouriteButtonCubit>().favouriteButtonUpdated(song.songId);
+
+                if (extraFunction != null){
+                  extraFunction!();
+                }
               },
               padding: EdgeInsets.zero,
               icon: Icon(
@@ -35,8 +40,12 @@ class FavouriteButton extends StatelessWidget {
 
           if (state is FavouriteButtonUpdated) {
             return IconButton(
-              onPressed: () {
-                context.read<FavouriteButtonCubit>().favouriteButtonUpdated(song.songId);
+              onPressed: () async {
+                 await context.read<FavouriteButtonCubit>().favouriteButtonUpdated(song.songId);
+
+                 if (extraFunction != null){
+                   extraFunction!();
+                 }
               },
               padding: EdgeInsets.zero,
               icon: Icon(
