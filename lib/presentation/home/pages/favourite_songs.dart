@@ -15,7 +15,7 @@ class FavouriteSongs extends StatelessWidget {
     return BlocProvider(
       create: (_) => FavouriteSongsCubit()..getFavouriteSongs(),
       child: BlocBuilder<FavouriteSongsCubit, FavouriteSongsState>(
-        builder: (context, state) {
+        builder: (_, state) {
           if (state is FavouriteSongsLoading) {
             return Container(
                 alignment: Alignment.center,
